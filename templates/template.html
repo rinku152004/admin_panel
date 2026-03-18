@@ -1,7 +1,10 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+<head>
   <link rel="stylesheet" href="{% static 'myglobal.css' %}">
+  <title>My Djangoproject</title>
+</head>
 <body>
   
 {% if greeting == 1 %}
@@ -11,8 +14,7 @@
 {% endif %}
 <ul>
   {% for x in mymembers %}
-    <li style="color:  {% cycle 'red' 'green' 'blueviolet' 'purple' 'black' 'goldenrod' 'palevioletred' 'orange' %} ">
-    <!-- <li>   -->
+    <li class="{% cycle 'red' 'green' 'blueviolet' 'purple' 'black' 'goldenrod' 'palevioletred' 'orange' %}">
       {{ x.fname }}
     </li>
   {% endfor %}
@@ -26,7 +28,7 @@
 
 <p>Loop through the items:</p>
 
-<table border="2">
+<table class="member-table">
   <tr>
     <th>ID</th>
     <th>Firstname</th>
@@ -47,7 +49,14 @@
       <td>{{ x.join_date }}</td>
       <td>{{ x.email }}</td>
       <td>{{ x.address }}</td>
-      <td><img src="{{ x.image.url }}" alt="{{ x.fname }}" width="100"></td>
+      <td>
+      {% if x.image %}
+        <img src="{{ x.image.url }}" alt="{{ x.fname }}" width="100">
+      {% else %}
+        No Image
+      {% endif %}
+      </td>
+      <!-- <td><img src="{{ x.image.url }}" alt="{{ x.fname }}" width="100"></td> -->
       <!-- <td><img src="{{x.file.url}}" alt="{{x.fname}}" width="100"></td> -->
     </tr>
   {% endfor %}
