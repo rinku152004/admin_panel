@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2>Add Recipe</h2>
+
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+<input type="text" name="recipe_name" class="form-control mb-2" placeholder="Recipe Name">
+
+<textarea name="recipe_ingredients" class="form-control mb-2" placeholder="Ingredients"></textarea>
+
+<textarea name="recipe_description" class="form-control mb-2" placeholder="Description"></textarea>
+
+<input type="file" name="recipe_image" class="form-control mb-2">
+
+<button type="submit" class="btn btn-success">Add Recipe</button>
+
+</form>
+
+<hr>
+
+<form method="GET">
+
+<div class="mb-3">
+<input type="text" name="search" class="form-control" placeholder="Search Recipe">
+</div>
+
+<button class="btn btn-primary">Search</button>
+
+</form>
+<br>
+<h2>Available Recipes</h2>
+
+<table class="table table-bordered">
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Ingredients</th>
+<th>Description</th>
+<th>Image</th>
+<th>Update</th>
+</tr>
+
+{% for recipe in recipes %}
+
+<tr>
+
+<td>{{recipe.id}}</td>
+<td>{{recipe.recipe_name}}</td>
+<td>{{recipe.recipe_ingredients}}</td>
+<td>{{recipe.recipe_description}}</td>
+
+<td>
+<img src="/media/{{recipe.recipe_image}}" width="100">
+</td>
+
+<td>
+<a href="/update_recipe/{{recipe.id}}/" class="btn btn-primary">Edit</a><br>
+<a href="/delete_recipe/{{recipe.id}}/" class="btn btn-danger">Delete</a>
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}

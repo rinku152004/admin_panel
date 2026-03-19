@@ -19,10 +19,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
-from Myapp import views
+# from Myapp import views
+from vege.views import *
 
 urlpatterns = [
-    # path('', views.main, name='main'),
+    path('admin/', admin.site.urls),
+    path('', include('vege.urls')),
     path('', include('Myapp.urls')),
     # path('testing/', views.testing, name='testing'),
     path('admin/', admin.site.urls),
