@@ -44,7 +44,7 @@
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-            <span class="navbar-text">Hello, {{ request.user.username }}!</span>
+            <span class="navbar-text">Hello, {{ request.user.first_name }}!</span>
             <a class="nav-link btn btn-outline-success" href="/logout/">Logout</a>
           {% else %}
             <a class="nav-link" href="/login/">Login</a>

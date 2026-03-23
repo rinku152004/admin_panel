@@ -4,6 +4,14 @@
 <!-- {{request.user.username}} -->
 <div class="container mt-5 ">
 
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success col-6 mx-auto card p-3" style="color: green; font-weight: bold;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
 <form class="col-6 mx-auto card p-3 shadow-lg" method="POST" enctype="multipart/form-data" >
 {% csrf_token %}
 

@@ -78,25 +78,14 @@ def login_page(request):
             return redirect('/login/')
         else:
             login(request, user)
-            messages.success(request, 'Login successful')
+            messages.success(request, 'Login successfully')
             return redirect('/recipes/')
-
-        # if user:
-        #     if user.check_password(password):
-        #         messages.info(request, 'Login successful')
-        #         return redirect('/recipes/')
-        #     else:
-        #         messages.info(request, 'Incorrect password')
-        #         return redirect('/login/')
-        # else:
-        #     messages.info(request, 'User does not exist')
-        #     return redirect('/login/')
 
     return render(request, 'login.html')
 
 def logout_page(request):
     logout(request)
-    messages.info(request, 'Logout successful')
+    messages.info(request, 'Logout successfully')
     return redirect('/login/')
 
 def register(request):

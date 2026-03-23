@@ -10,12 +10,11 @@
 <h2>Register</h2>
 <hr>
 {% if messages %}
-{{ messages.tags }}
-<div class="alert alert-primary" role="alert">
     {% for message in messages %}
-        {{ message }}
+        <div class="alert alert-success" style="color: green; font-weight: bold;">
+            {{ message }}
+        </div>
     {% endfor %}
-</div>
 {% endif %}
 
 <div class="mb-3">
@@ -36,7 +35,7 @@
     <input type="password" class="form-control" name="password" id="exampleInputPassword1">
 </div>
 <p>Already have an account <a href="/login/">Login</a> </p>
-<button type="submit" class="btn btn-primary">Submit</button>
+<button type="submit" class="btn btn-primary">Register</button>
 
 </form>
 </div>
