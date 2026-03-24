@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Roles</h3>
+
+<a href="/roles/create_role/" class="btn btn-primary m-2">Create Role</a>
+
+<table class="table table-bordered">
+
+<tr>
+<th>ID</th>
+<th>Role Name</th>
+</tr>
+
+{% for role in roles %}
+
+<tr>
+<td>{{role.id}}</td>
+<td>{{role.name}}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

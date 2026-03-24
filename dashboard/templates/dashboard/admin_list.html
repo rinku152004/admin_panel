@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Admin List</h3>
+
+<a href="/accounts/create-admin/" class="btn btn-primary mb-3">
+Create New Admin
+</a>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>ID</th>
+<th>Username</th>
+<th>Role</th>
+<th>Level</th>
+<th>Parent Admin</th>
+<th>Action</th>
+
+</tr>
+
+{% for admin in admins %}
+
+<tr>
+
+<td>{{admin.id}}</td>
+
+<td>{{admin.username}}</td>
+
+<td>{{admin.role_type}}</td>
+
+<td>{{admin.level}}</td>
+
+<td>{{admin.parent_admin}}</td>
+
+<td>
+
+<button class="btn btn-warning btn-sm mb-2">Edit</button>
+
+<button class="btn btn-danger btn-sm">Delete</button>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}
