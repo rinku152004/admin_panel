@@ -13,12 +13,14 @@ class User(AbstractUser):
 
     role_type = models.CharField(max_length=20, choices=ROLE_TYPES)
 
+    role=models.ForeignKey('Role', on_delete=models.SET_NULL, null=True, blank=True)
+
     parent_admin = models.ForeignKey(
         'self',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name='children_admins'
+        related_name='children'
     )
 
     is_active_admin = models.BooleanField(default=True)

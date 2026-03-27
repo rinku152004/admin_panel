@@ -25,11 +25,9 @@ urlpatterns = [
     path('', home, name='home'),
     path('', lambda request: redirect('/dashboard/'), name='home_redirect'),
     path('admin/', admin.site.urls),
-    path('logout/', accounts_views.logout_view, name='logout'),
     path('dashboard/', include('dashboard.urls')),
     path('accounts/', include('accounts.urls')),
     path('roles/', include('roles.urls')),
-    path('register/', accounts_views.register_view, name='register'),
     
 ]
 

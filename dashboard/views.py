@@ -12,11 +12,15 @@ def home(request):
 def dashboard(request):
     total_users=User.objects.count()
     total_admins=User.objects.filter(role_type="admin").count()
+    total_super_admins=User.objects.filter(role_type="super_admin").count()
+    total_sub_admins=User.objects.filter(role_type="sub_admin").count()
     total_roles= Role.objects.count()
 
     context={
         "total_users":total_users,
+        "total_super_admins": total_super_admins,
         "total_admins": total_admins,
+        "total_sub_admins": total_sub_admins,
         "total_roles": total_roles
     }
 
@@ -26,7 +30,7 @@ def dashboard(request):
 @login_required(login_url='/accounts/login/')
 def admin_list(request):
 
-    admins = User.objects.filter(parent_admin__isnull=False)
+    admins = User.objects.all().order_by('level','id')
 
     return render(request, "dashboard/admin_list.html", {"admins": admins})
 

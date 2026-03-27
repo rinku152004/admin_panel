@@ -7,24 +7,9 @@
 <ul>
 
 {% for admin in admins %}
-<li>
-<strong>{{ admin.username }}</strong>
 
-<ul>
-{% for child in admin.children_admins.all %}
-<li>{{ child.username }}
+    {% include "dashboard/admin_node.html" with admin=admin %}
 
-    <ul>
-    {% for sub in child.children_admins.all %}
-        <li>{{ sub.username }}</li>
-    {% endfor %}
-    </ul>
-
-</li>
-{% endfor %}
-</ul>
-
-</li>
 {% endfor %}
 
 </ul>

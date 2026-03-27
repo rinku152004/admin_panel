@@ -1,0 +1,12 @@
+<li>
+<strong>{{ admin.username }}</strong> ({{ admin.role_type }})
+
+{% if admin.children.all %}
+<ul>
+    {% for child in admin.children.all %}
+        {% include "dashboard/admin_node.html" with admin=child %}
+    {% endfor %}
+</ul>
+{% endif %}
+
+</li>

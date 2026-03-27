@@ -25,7 +25,7 @@ Create New Admin
 
 <tr>
 
-<td>{{admin.id}}</td>
+<td>{{forloop.counter}}</td>
 
 <td>{{admin.username}}</td>
 
@@ -33,7 +33,7 @@ Create New Admin
 
 <td>{{admin.level}}</td>
 
-<td>{{admin.parent_admin}}</td>
+<td>{{admin.parent_admin.username|default:"-"}}</td>
 
 <td>
 <a href="/accounts/edit/{{admin.id}}/" class="btn btn-warning">Edit</a>
