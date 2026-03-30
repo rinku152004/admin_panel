@@ -46,6 +46,17 @@
 
             </div>
 
+            <div class="mb-3">
+                <label class="form-label">New Password (leave blank to keep current)</label>
+                <input type="password" name="password" class="form-control" placeholder="Enter new password if you want to change it">
+
+            </div>
+
+            <div class="form-check mb-3">
+                <input type="checkbox" name="is_active_admin" class="form-check-input" id="activeCheck" {% if user.is_active_admin %}checked{% endif %}>
+                <label class="form-check-label" for="activeCheck">Active Admin</label>
+            </div>
+
             <button type="submit" class="btn btn-success">Update User</button>
 
             <a href="{% url 'admin_list' %}" class="btn btn-secondary">Cancel</a>

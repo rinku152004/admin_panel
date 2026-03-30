@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -28,7 +28,7 @@ def login_view(request):
             login(request, user)
             return redirect("dashboard")
         else:
-            messages.error(request, "Invalid username or password")
+            messages.info(request, "Invalid username or password")
             return render(request, "accounts/login.html")
 
     return render(request, "accounts/login.html")
@@ -116,12 +116,23 @@ def edit_admin(request, id):
         messages.error(request, "You don't have permission to edit this user.")
         return redirect('/dashboard/admins/')
 
-    # Prevent editing super admin
+    # # Prevent editing super admin
     if user.role_type == "super_admin":
         messages.error(request, "Super admin cannot be edited.")
         return redirect('/dashboard/admins/')
 
     if request.method == "POST":
+
+        user.username = request.POST.get("username")
+        user.role_type = request.POST.get("role_type")
+        # update password only if provided
+        password = request.POST.get("password")
+        if password and len(password) < 6:
+            messages.error(request, "Password must be at least 6 characters long.")
+            return redirect(f'/accounts/edit/{id}/')
+
+        if password:
+            user.set_password(password)
 
         parent_id = request.POST.get('parent_admin')
         if parent_id:
@@ -146,15 +157,12 @@ def edit_admin(request, id):
             #     messages.error(request, "Parent admin must be a super admin or your direct parent.")
             #     return redirect(f'/accounts/edit/{id}/')
             
-        user.username = request.POST.get('username')
-        user.role_type = request.POST.get('role_type')
-
-        password = request.POST.get('password')
-
-        if password:
-            user.set_password(password)
 
         user.save()
+
+        # Update session auth hash if the user is updating their own password
+        if request.user.id== user.id and password:
+            update_session_auth_hash(request, user) #Prevents logout after password change
 
         messages.success(request, "User updated successfully")
 
