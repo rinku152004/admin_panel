@@ -36,7 +36,7 @@
             <label class="form-label">Parent Admin</label>
 
             <select name="parent_admin" class="form-control">
-            {% for admin in admins %}
+            {% for admin in admin_list %}
             <option value="{{ admin.id }}"
             {% if user.parent_admin and user.parent_admin.id == admin.id %}selected{% endif %}>
             {{ admin.username }}

@@ -32,15 +32,15 @@ def admin_list(request):
 
     query = request.GET.get('q')
     if query:
-        admins = User.objects.select_related('parent_admin').filter(username__icontains=query).order_by('level','id')
+        admin_list = User.objects.select_related('parent_admin').filter(username__icontains=query).order_by('level','id')
     else:
-        admins = User.objects.select_related('parent_admin').all().order_by('level','id')
+        admin_list = User.objects.select_related('parent_admin').all().order_by('level','id')
 
-    return render(request, "dashboard/admin_list.html", {"admins": admins})
+    return render(request, "dashboard/admin_list.html", {"admin_list": admin_list})
 
-    # admins = User.objects.all().order_by('level','id')
+    # admin_list = User.objects.all().order_by('level','id')
 
-    # return render(request, "dashboard/admin_list.html", {"admins": admins})
+    # return render(request, "dashboard/admin_list.html", {"admin_list": admin_list})
 
 @login_required
 def reports(request):
@@ -51,7 +51,7 @@ def reports(request):
 @login_required
 def admin_tree(request):
 
-    admins = User.objects.filter(parent_admin=None, role_type='super_admin')
+    admin_list = User.objects.filter(parent_admin=None, role_type='super_admin')
 
-    return render(request, "dashboard/admin_tree.html", {"admins": admins})
+    return render(request, "dashboard/admin_tree.html", {"admin_list": admin_list})
 
